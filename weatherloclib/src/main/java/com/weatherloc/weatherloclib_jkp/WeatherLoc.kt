@@ -1,8 +1,8 @@
 package com.weatherloc.weatherloclib_jkp
 
-class WeatherLoc {
+open class WeatherLoc {
 
-
+    
 
     companion object{
         val instance = WeatherLoc()

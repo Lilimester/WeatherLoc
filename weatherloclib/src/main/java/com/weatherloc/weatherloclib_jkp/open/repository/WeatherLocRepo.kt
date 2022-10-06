@@ -1,18 +1,30 @@
 package com.weatherloc.weatherloclib_jkp.open.repository
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import com.weatherloc.weatherloclib_jkp.open.models.WeatherLatLngResponse
 import com.weatherloc.weatherloclib_jkp.open.networking.WebApiClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import com.weatherloc.weatherloclib_jkp.open.utils.securedCallsOfApi
+import kotlinx.coroutines.*
 
 class WeatherLocRepo {
     private val mApiService = WebApiClient.initiateWeatherLocApi
 
-    fun getWeatherFromLatLng(){
-        GlobalScope.launch {
+    val mLatLngCurrentResponse: MutableLiveData<WeatherLatLngResponse> = MutableLiveData()
 
+    fun getWeatherFromLatLng(lat:Double, lng:Double){
+        CoroutineScope(Dispatchers.IO).launch {
+            doGetWeahterFromLatLng(lat, lng)
         }
     }
 
+    private fun doGetWeahterFromLatLng(lat:Double, lng:Double) {
+        securedCallsOfApi({
+            Log.e("WeatherLoc",it.message.toString())
+        }){
+            mApiService.getWeatherConditionByLatLng(lat, lng).apply {
+                mLatLngCurrentResponse.value = this
+            }
+        }
+    }
 }
