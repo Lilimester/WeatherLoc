@@ -7,9 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherLocApi {
-    @GET(Api.apiWeatherUsingLatLng)
+    @GET(Api.currentfetchUsingLatLng)
     suspend fun getWeatherConditionByLatLng (
         @Query(Constants.LATITUDE) lat:Double,
         @Query(Constants.LONGITUDE) lng:Double,
+        @Query(Constants.API_QUERY_KEY) api_key:String = Constants.API_KEY
     ) : WeatherLatLngResponse
 }

@@ -9,33 +9,32 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class WebApiClient {
 
-    private var mRetrofit : Retrofit? = null
+    private lateinit var mRetrofit : Retrofit
     private val mIntercepter = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
     private fun clientCreation(): WeatherLocApi {
+        mRetrofit = getRetrofitInstance()
+        return mRetrofit.create(WeatherLocApi::class.java)!!
+    }
+
+    private fun getRetrofitInstance():Retrofit{
         val okHttpClient = OkHttpClient.Builder()
             .addNetworkInterceptor(mIntercepter)
             .build()
-
-        return when(mRetrofit != null){
-            true-> mRetrofit?.create(WeatherLocApi::class.java)!!
-            false->{
-                mRetrofit = Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                mRetrofit?.create(WeatherLocApi::class.java)!!
-            }
-        }
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     companion object{
         val initiateWeatherLocApi : WeatherLocApi by lazy {
             WebApiClient().clientCreation()
         }
+        val client = WebApiClient().getRetrofitInstance()
     }
 
 }
