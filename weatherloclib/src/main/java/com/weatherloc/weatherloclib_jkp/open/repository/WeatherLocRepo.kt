@@ -10,7 +10,7 @@ import kotlinx.coroutines.*
 class WeatherLocRepo {
     private val mApiService = WebApiClient.initiateWeatherLocApi
 
-    val mLatLngCurrentResponse: MutableLiveData<WeatherLatLngResponse> = MutableLiveData()
+    val mLatLngCurrentResponse: MutableLiveData<WeatherLatLngResponse?> = MutableLiveData()
 
     fun getWeatherFromLatLng(lat:Double, lng:Double){
         CoroutineScope(Dispatchers.IO).launch {
@@ -20,6 +20,7 @@ class WeatherLocRepo {
 
     private fun doGetWeahterFromLatLng(lat:Double, lng:Double) {
         securedCallsOfApi({
+            mLatLngCurrentResponse.value = null
             Log.e("WeatherLoc",it.message.toString())
         }){
             mApiService.getWeatherConditionByLatLng(lat, lng).apply {
