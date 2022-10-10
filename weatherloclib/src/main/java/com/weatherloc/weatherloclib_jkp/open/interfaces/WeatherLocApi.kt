@@ -1,6 +1,6 @@
 package com.weatherloc.weatherloclib_jkp.open.interfaces
 
-import com.weatherloc.weatherloclib_jkp.open.models.WeatherLatLngResponse
+import com.weatherloc.weatherloclib_jkp.open.models.WeatherData
 import com.weatherloc.weatherloclib_jkp.open.utils.Api
 import com.weatherloc.weatherloclib_jkp.open.utils.Constants
 import retrofit2.http.GET
@@ -12,5 +12,5 @@ interface WeatherLocApi {
         @Query(Constants.LATITUDE) lat:Double,
         @Query(Constants.LONGITUDE) lng:Double,
         @Query(Constants.API_QUERY_KEY) api_key:String = Constants.API_KEY
-    ) : WeatherLatLngResponse
+    ) : WeatherData
 }

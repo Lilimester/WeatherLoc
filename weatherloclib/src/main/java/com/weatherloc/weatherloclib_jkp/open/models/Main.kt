@@ -6,33 +6,33 @@ import com.google.gson.annotations.SerializedName
 data class Main(
     @SerializedName("temp")
     @Expose
-    private val temp: Double? = null,
+    val temp: Double? = null,
 
     @SerializedName("feels_like")
     @Expose
-    private val feelsLike: Double? = null,
+    val feelsLike: Double? = null,
 
     @SerializedName("temp_min")
     @Expose
-    private val tempMin: Double? = null,
+    val tempMin: Double? = null,
 
     @SerializedName("temp_max")
     @Expose
-    private val tempMax: Double? = null,
+    val tempMax: Double? = null,
 
     @SerializedName("pressure")
     @Expose
-    private val pressure: Int? = null,
+    val pressure: Int? = null,
 
     @SerializedName("humidity")
     @Expose
-    private val humidity: Int? = null,
+    val humidity: Int? = null,
 
     @SerializedName("sea_level")
     @Expose
-    private val seaLevel: Int? = null,
+    val seaLevel: Int? = null,
 
     @SerializedName("grnd_level")
     @Expose
-    private val grndLevel: Int? = null
+    val grndLevel: Int? = null
 )
