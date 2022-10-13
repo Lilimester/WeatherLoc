@@ -116,3 +116,4 @@
 .idea/modules/weatherloclib/WeatherLoc.weatherloclib.iml
 .idea/modules/weatherloclib/WeatherLoc.weatherloclib.main.iml
 .idea/modules/weatherloclib/WeatherLoc.weatherloclib.unitTest.iml
+.gradle/workspace-id.txt

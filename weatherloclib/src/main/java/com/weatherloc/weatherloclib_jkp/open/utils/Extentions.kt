@@ -19,11 +19,20 @@ fun securedCallsOfApi(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.M)
-fun isInternetAvailable(context: Context):Boolean{
-    val connectionManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val networkInfo = connectionManager.activeNetworkInfo
-    return networkInfo!=null && networkInfo.isAvailable && networkInfo.isConnected
+fun Double?.getTemperatureInC():Double{
+    if(this==null){
+        return 0.0
+    } else {
+        return this - 273.15
+    }
+}
+
+fun Double?.getTemperatureInF():Double{
+    if(this==null){
+        return 0.0
+    } else {
+        return (this - 273.15)*9/5 + 32
+    }
 }
 
 

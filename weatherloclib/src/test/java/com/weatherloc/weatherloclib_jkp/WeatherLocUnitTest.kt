@@ -1,7 +1,7 @@
 package com.weatherloc.weatherloclib_jkp
 
 import com.google.gson.Gson
-import com.weatherloc.weatherloclib_jkp.open.models.WeatherData
+import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWeatherData
 import com.weatherloc.weatherloclib_jkp.open.networking.WebApiClient
 import com.weatherloc.weatherloclib_jkp.open.utils.Constants
 import kotlinx.coroutines.*
@@ -24,7 +24,7 @@ class WeatherLocUnitTest {
     @Test
     fun test_api_for_weather_current_lat_lng() {
         val api = WebApiClient.initiateWeatherLocApi
-        var response : WeatherData?
+        var response : CurrentWeatherData?
         runBlocking {
             response = api.getWeatherConditionByLatLng(44.34, 10.99)
         }

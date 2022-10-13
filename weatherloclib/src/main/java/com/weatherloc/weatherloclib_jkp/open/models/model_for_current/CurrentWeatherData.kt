@@ -1,9 +1,9 @@
-package com.weatherloc.weatherloclib_jkp.open.models
+package com.weatherloc.weatherloclib_jkp.open.models.model_for_current
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class WeatherData {
+class CurrentWeatherData {
     @SerializedName("coord")
     @Expose
     val coord: Coord? = null
