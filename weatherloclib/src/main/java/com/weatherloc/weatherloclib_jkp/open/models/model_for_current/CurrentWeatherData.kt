@@ -40,6 +40,14 @@ class CurrentWeatherData {
     @Expose
     val system: System? = null
 
+    @SerializedName("rain")
+    @Expose
+    val rain: Rain? = null
+
+    @SerializedName("snow")
+    @Expose
+    val snow: Snow? = null
+
     @SerializedName("timezone")
     @Expose
     val timezone: Int? = null

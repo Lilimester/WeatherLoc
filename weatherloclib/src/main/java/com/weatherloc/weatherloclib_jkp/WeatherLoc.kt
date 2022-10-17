@@ -10,7 +10,21 @@ import com.weatherloc.weatherloclib_jkp.open.enum.TemperatureUnitType
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWeatherData
 import com.weatherloc.weatherloclib_jkp.open.utils.DayRange
 
-class WeatherLoc(private val mUnitType:TemperatureUnitType? = null) : OpenWeatherLocCaller() {
+class WeatherLoc(private val mContext: Context, private val mUnitType:TemperatureUnitType? = null) : OpenWeatherLocCaller() {
+
+   /**
+    * below function checkes for the connectivity of the internet.
+    *
+    * Parameters: Context - Interface to global information about an application environment.  This is
+    *                       an abstract class whose implementation is provided by
+    *                       the Android system.  It
+    *                       allows access to application-specific resources and classes, as well as
+    *                       up-calls for application-level operations such as launching activities,
+    *                       broadcasting and receiving intents, etc.
+    *
+    * Result: true - This value is returned when network connectivity is available.
+    *         false - This value is returned when network connectivity is not available.
+    */
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun isInternetAvailable(context: Context):Boolean{
@@ -19,6 +33,87 @@ class WeatherLoc(private val mUnitType:TemperatureUnitType? = null) : OpenWeathe
         return networkInfo!=null && networkInfo.isAvailable && networkInfo.isConnected
     }
 
+   /**
+    * Below function fetches the weather data for current time based on the latitude and longitude.
+    *
+    * The inner implementation is based on the coroutine hence can be called from any view classes
+    * without putting burden to the main thread.
+    *
+    * Parameters:
+    *
+    * lifecycleOwner - A class that has an Android lifecycle. These events can be used by custom
+    * components to handle lifecycle changes without implementing any code inside the Activity or
+    * the Fragment.
+    *
+    * lat - Double datatype value of Latitude.
+    *
+    * lng - Double datatype value of Longitude.
+    *
+    * successBlock - A method callback that provides the end result of weather data. weather data
+    * object has multiple properties through which data can be obtained.
+    *
+    * objects parameters are as follows.
+    *
+    *   weather -
+    *       coord -
+    *           coord.lon - City geo location, longitude
+    *           coord.lat - City geo location, latitude
+    *
+    *       weather -
+    *           weather.id - Weather condition id
+    *           weather.main_weather - Group of weather parameters (Rain, Snow, Extreme etc.)
+    *           weather.description - Weather condition within the group. You can get the output in your language. Learn more
+    *           weather.icon Weather icon id
+    *
+    *       base - Internal parameter
+    *
+    *       main -
+    *           main.temp - Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+    *           main.feels_like - Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+    *           main.pressure - Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
+    *           main.humidity - Humidity, %
+    *           main.temp_min - Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+    *           main.temp_max - Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+    *           main.sea_level - Atmospheric pressure on the sea level, hPa
+    *           main.grnd_level - Atmospheric pressure on the ground level, hPa
+    *
+    *       visibility - Visibility, meter. The maximum value of the visibility is 10km
+    *
+    *       wind -
+    *           wind.speed - Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+    *           wind.deg - Wind direction, degrees (meteorological)
+    *           wind.gust - Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour
+    *
+    *       clouds -
+    *           clouds.all - Cloudiness, %
+    *
+    *       rain -
+    *           rain.oneHour - Rain volume for the last 1 hour, mm
+    *           rain.threeHours - Rain volume for the last 3 hours, mm
+    *
+    *       snow -
+    *           snow.oneHour - Snow volume for the last 1 hour, mm
+    *           snow.threeHours - Snow volume for the last 3 hours, mm
+    *
+    *       dt - Time of data calculation, unix, UTC
+    *
+    *       sys -
+    *           sys.type - Internal parameter
+    *           sys.id - Internal parameter
+    *           sys.message - Internal parameter
+    *           sys.country - Country code (GB, JP etc.)
+    *           sys.sunrise - Sunrise time, unix, UTC
+    *           sys.sunset - Sunset time, unix, UTC
+    *
+    *       timezone - Shift in seconds from UTC
+    *
+    *       id - City ID. Please note that built-in geocoder functionality has been deprecated. Learn more here.
+    *
+    *       name - City name. Please note that built-in geocoder functionality has been deprecated. Learn more here.
+    *
+    *       cod - Internal parameter
+    *
+    */
     fun obtainCurrentWeatherByLatLng(
         lifecycleOwner: LifecycleOwner,
         lat: Double,
@@ -26,7 +121,19 @@ class WeatherLoc(private val mUnitType:TemperatureUnitType? = null) : OpenWeathe
         successBlock: (weather: CurrentWeatherData) -> Unit,
         failureBlock: (exception:Exception) -> Unit
     ) {
-        obtainCurrentWeatherFromLatLng(lifecycleOwner, lat, lng, successBlock, failureBlock, mUnitType)
+        if(isInternetAvailable(mContext)) {
+            obtainCurrentWeatherFromLatLng(
+                lifecycleOwner,
+                lat,
+                lng,
+                successBlock,
+                failureBlock,
+                mUnitType
+            )
+        } else {
+            val exception: Exception = Exception("Internet is not available!")
+            failureBlock.invoke(exception)
+        }
     }
 
     fun obtainFutureWeatherByLatLng(
@@ -41,12 +148,8 @@ class WeatherLoc(private val mUnitType:TemperatureUnitType? = null) : OpenWeathe
     }
 
     companion object{
-        val instance = WeatherLoc()
-        val instanceWithStandardUnit = WeatherLoc(TemperatureUnitType.STANDARD)
-        val instanceWithMetricUnit = WeatherLoc(TemperatureUnitType.METRIC)
-        val instanceWithImperialUnit = WeatherLoc(TemperatureUnitType.IMPERIAL)
 
-        fun convertKelvinToCelsius(value: Double):Double{
+        fun convertKelvinToCelsius(value: Double):Double {
             return value - 273.15
         }
 

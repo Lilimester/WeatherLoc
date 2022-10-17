@@ -11,7 +11,7 @@ data class Weather(
 
     @SerializedName("main")
     @Expose
-    val main: String? = null,
+    val main_weather: String? = null,
 
     @SerializedName("description")
     @Expose
