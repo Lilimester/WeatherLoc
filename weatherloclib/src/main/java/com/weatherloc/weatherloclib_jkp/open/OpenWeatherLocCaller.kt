@@ -6,9 +6,26 @@ import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWea
 import com.weatherloc.weatherloclib_jkp.open.repository.WeatherLocRepo
 import com.weatherloc.weatherloclib_jkp.open.utils.DayRange
 
-internal open class OpenWeatherLocCaller {
+internal class OpenWeatherLocCaller {
 
+    /**
+     * Initialization of instance for calling the methods of the repository.
+     */
     private val weatherRepo = WeatherLocRepo()
+
+    /**
+     * Below method fetches the data of weather for current time through latitude and longitude of
+     * location.
+     *
+     * For parameter info, it has been provided over the calling method at WeatherLoc class.
+     * Below class calls the network api and observes the response received from Api.
+     *
+     * On successful call it invokes the block wrote by the user and provides the data to user which
+     * can be utilized as per user's need.
+     *
+     * On failure of call, it invokes the failureBlock, providing the user an exception about what went
+     * wrong. It also invokes the block on which user can perform certain action if api call fails.
+     */
 
     fun obtainCurrentWeatherFromLatLng(
         lifecycleOwner: LifecycleOwner,
@@ -28,6 +45,19 @@ internal open class OpenWeatherLocCaller {
         weatherRepo.getWeatherFromLatLng(lat, lng, unitPreference)
     }
 
+    /**
+     * Below method fetches the data of weather for specified duration of time through latitude and
+     * longitude of location.
+     *
+     * For parameter info, it has been provided over the calling method at WeatherLoc class.
+     * Below class calls the network api and observes the response received from Api.
+     *
+     * On successful call it invokes the block wrote by the user and provides the data to user which
+     * can be utilized as per user's need.
+     *
+     * On failure of call, it invokes the failureBlock, providing the user an exception about what went
+     * wrong. It also invokes the block on which user can perform certain action if api call fails.
+     */
 
     fun obtainFutureWeatherFromLatLng(
         lifecycleOwner: LifecycleOwner,

@@ -39,7 +39,12 @@ import com.weatherloc.weatherloclib_jkp.open.utils.DayRange
  * section which is at bottom of this class. There are companion methods which can be utilized for such purpose.
  *
  */
-class WeatherLoc(private val mContext: Context, private val mUnitType:TemperatureUnitType? = null) : OpenWeatherLocCaller() {
+class WeatherLoc(private val mContext: Context, private val mUnitType:TemperatureUnitType? = null) {
+
+    /**
+    * This instance is utilized to call the module methods to bring the requested results.
+    */
+    private val mOpenWeatherLoc = OpenWeatherLocCaller()
 
    /**
     * below function checks for the connectivity of the internet.
@@ -137,7 +142,7 @@ class WeatherLoc(private val mContext: Context, private val mUnitType:Temperatur
         failureBlock: (exception:Exception) -> Unit
     ) {
         if(isInternetAvailable(mContext)) {
-            obtainCurrentWeatherFromLatLng(
+            mOpenWeatherLoc.obtainCurrentWeatherFromLatLng(
                 lifecycleOwner,
                 lat,
                 lng,
@@ -222,7 +227,7 @@ class WeatherLoc(private val mContext: Context, private val mUnitType:Temperatur
         successBlock: (weather: CurrentWeatherData) -> Unit,
         failureBlock: (exception:Exception) -> Unit
     ) {
-        obtainFutureWeatherFromLatLng(lifecycleOwner, lat, lng, dayRange, successBlock, failureBlock, mUnitType)
+        mOpenWeatherLoc.obtainFutureWeatherFromLatLng(lifecycleOwner, lat, lng, dayRange, successBlock, failureBlock, mUnitType)
     }
 
     companion object{
