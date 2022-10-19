@@ -13,7 +13,7 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        val weatherloc = WeatherLoc.instanceWithStandardUnit
+        val weatherloc = WeatherLoc(this)
 
         val successBlock:(weather: CurrentWeatherData) -> Unit = {
             Log.e("DATA CAME HURRAY", " === === ${it.toString()}")

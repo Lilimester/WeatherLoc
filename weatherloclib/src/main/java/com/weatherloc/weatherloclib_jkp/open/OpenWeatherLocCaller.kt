@@ -6,8 +6,7 @@ import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWea
 import com.weatherloc.weatherloclib_jkp.open.repository.WeatherLocRepo
 import com.weatherloc.weatherloclib_jkp.open.utils.DayRange
 
-
-open class OpenWeatherLocCaller {
+internal open class OpenWeatherLocCaller {
 
     private val weatherRepo = WeatherLocRepo()
 

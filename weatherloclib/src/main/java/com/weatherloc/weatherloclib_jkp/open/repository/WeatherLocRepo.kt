@@ -10,7 +10,8 @@ import com.weatherloc.weatherloclib_jkp.open.utils.DayRange
 import com.weatherloc.weatherloclib_jkp.open.utils.securedCallsOfApi
 import kotlinx.coroutines.*
 
-class WeatherLocRepo {
+
+internal class WeatherLocRepo {
     private val mApiService = WebApiClient.initiateWeatherLocApi
     var mException = Exception()
 
@@ -33,9 +34,6 @@ class WeatherLocRepo {
             }
         }
     }
-
-
-
 
     val mLatLngFutureResponse: MutableLiveData<FutureWeatherData?> = MutableLiveData()
 
