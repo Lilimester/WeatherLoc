@@ -1,14 +1,15 @@
 package com.weatherloc.weatherloclib_jkp.open.models.model_for_current
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.weatherloc.weatherloclib_jkp.open.utils.getTemperatureInC
-import com.weatherloc.weatherloclib_jkp.open.utils.getTemperatureInF
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Main(
     @SerializedName("temp")
     @Expose
-    private val temp: Double? = null,
+    val temp: Double? = null,
 
     @SerializedName("feels_like")
     @Expose
@@ -37,8 +38,4 @@ data class Main(
     @SerializedName("grnd_level")
     @Expose
     val grndLevel: Int? = null,
-
-    val temperatureInCelcius: Double? = temp.getTemperatureInC(),
-
-    val temperatureInFahrenheit: Double? = temp.getTemperatureInF()
-)
+): Parcelable

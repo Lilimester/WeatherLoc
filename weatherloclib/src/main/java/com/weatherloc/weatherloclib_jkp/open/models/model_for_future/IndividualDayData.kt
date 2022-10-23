@@ -1,63 +1,68 @@
 package com.weatherloc.weatherloclib_jkp.open.models.model_for_future
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.Clouds
+import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.Rain
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.Weather
+import kotlinx.parcelize.Parcelize
 
-class IndividualDayData {
+@Parcelize
+data class IndividualDayData (
     @SerializedName("dt")
     @Expose
-    private val dt: Int? = null
+    val dt: Int? = null,
 
     @SerializedName("sunrise")
     @Expose
-    private val sunrise: Int? = null
+    val sunrise: Int? = null,
 
     @SerializedName("sunset")
     @Expose
-    private val sunset: Int? = null
+    val sunset: Int? = null,
 
     @SerializedName("temp")
     @Expose
-    private val temp: Temp? = null
+    val temp: Temperature? = null,
 
     @SerializedName("feels_like")
     @Expose
-    private val feelsLike: FeelsLike? = null
+    val feelsLike: FeelsLike? = null,
 
     @SerializedName("pressure")
     @Expose
-    private val pressure: Int? = null
+    val pressure: Int? = null,
 
     @SerializedName("humidity")
     @Expose
-    private val humidity: Int? = null
+    val humidity: Int? = null,
 
     @SerializedName("weather")
     @Expose
-    private val weather: List<Weather>? = null
+    val weather: List<Weather>? = null,
 
     @SerializedName("speed")
     @Expose
-    private val speed: Double? = null
+    val speed: Double? = null,
 
     @SerializedName("deg")
     @Expose
-    private val deg: Int? = null
+    val deg: Int? = null,
 
     @SerializedName("gust")
     @Expose
-    private val gust: Double? = null
+    val gust: Double? = null,
 
     @SerializedName("clouds")
     @Expose
-    private val clouds: Int? = null
+    val clouds: Clouds? = null,
 
     @SerializedName("pop")
     @Expose
-    private val pop: Double? = null
+    val pop: Double? = null,
 
     @SerializedName("rain")
     @Expose
-    private val rain: Double? = null
-}
+    val rain: Rain? = null,
+): Parcelable

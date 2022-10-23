@@ -1,30 +1,33 @@
 package com.weatherloc.weatherloclib_jkp.open.models.model_for_future
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-class Temp {
+@Parcelize
+data class Temperature (
     @SerializedName("day")
     @Expose
-    private val day: Double? = null
+    val day: Double? = null,
 
     @SerializedName("min")
     @Expose
-    private val min: Double? = null
+    val min: Double? = null,
 
     @SerializedName("max")
     @Expose
-    private val max: Double? = null
+    val max: Double? = null,
 
     @SerializedName("night")
     @Expose
-    private val night: Double? = null
+    val night: Double? = null,
 
     @SerializedName("eve")
     @Expose
-    private val eve: Double? = null
+    val eve: Double? = null,
 
     @SerializedName("morn")
     @Expose
-    private val morn: Double? = null
-}
+    val morn: Double? = null,
+): Parcelable

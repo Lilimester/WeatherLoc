@@ -1,22 +1,25 @@
 package com.weatherloc.weatherloclib_jkp.open.models.model_for_future
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-class FeelsLike {
+@Parcelize
+data class FeelsLike(
     @SerializedName("day")
     @Expose
-    private val day: Double? = null
+    val day: Double? = null,
 
     @SerializedName("night")
     @Expose
-    private val night: Double? = null
+    val night: Double? = null,
 
     @SerializedName("eve")
     @Expose
-    private val eve: Double? = null
+    val eve: Double? = null,
 
     @SerializedName("morn")
     @Expose
-    private val morn: Double? = null
-}
+    val morn: Double? = null,
+): Parcelable

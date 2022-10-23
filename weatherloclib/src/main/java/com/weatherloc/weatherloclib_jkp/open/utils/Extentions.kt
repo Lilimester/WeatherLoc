@@ -1,11 +1,16 @@
 package com.weatherloc.weatherloclib_jkp.open.utils
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.os.Build
-import androidx.annotation.RequiresApi
 import kotlinx.coroutines.*
 
+/**
+ *
+ * Below method uses coroutine scope which creates a [CoroutineScope].
+ *
+ * Method call for any api call block and throws the exception if found any.
+ * failure block would be invoked for the catchBlock.
+ *
+ * On successful operation, the apiCallBlock would be involved.
+ * */
 fun securedCallsOfApi(
     catchBlock: suspend(Exception)-> Unit,
     apiCallBlock: suspend () -> Unit
@@ -18,42 +23,3 @@ fun securedCallsOfApi(
         }
     }
 }
-
-fun Double?.getTemperatureInC():Double{
-    if(this==null){
-        return 0.0
-    } else {
-        return this - 273.15
-    }
-}
-
-fun Double?.getTemperatureInF():Double{
-    if(this==null){
-        return 0.0
-    } else {
-        return (this - 273.15)*9/5 + 32
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

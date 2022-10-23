@@ -14,5 +14,6 @@ object Constants {
 object Api {
     const val currentfetchUsingLatLng = "data/2.5/weather?"
     const val fetchUsingLatLngForSpecificDuration = "data/2.5/forecast/daily?"
+    const val fetchUsingLatLngForFiveDays = "data/2.5/forecast?"
     const val appendApi = "&appid=${Constants.API_KEY}}"
 }

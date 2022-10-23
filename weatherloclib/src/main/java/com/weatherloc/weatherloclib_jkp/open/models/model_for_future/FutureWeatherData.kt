@@ -1,23 +1,27 @@
 package com.weatherloc.weatherloclib_jkp.open.models.model_for_future
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
-class FutureWeatherData {
-
+@Parcelize
+data class FutureWeatherData(
     @SerializedName("city")
     @Expose
-    private var city: City? = null
+    var city: City? = null,
     @SerializedName("cod")
     @Expose
-    private var cod:String? = null
+    var cod: String? = null,
     @SerializedName("message")
     @Expose
-    private var message: Double? = null
+    var message: Double? = null,
     @SerializedName("cnt")
     @Expose
-    private var cnt: Integer? = null
+    var cnt: Integer? = null,
     @SerializedName("list")
     @Expose
-    private var list: MutableList<IndividualDayData>? = null
-}
+    var list: MutableList<IndividualDayData>? = null
+) : Parcelable
