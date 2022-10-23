@@ -10,7 +10,7 @@ import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.FutureWeath
 import java.util.Locale
 
 /**
- * This class helps in obtaining the weather information for current as well as for the specified duration
+ * This class helps in obtaining the weather information for current, 5 days as well as for the specified duration
  * of the time. The initialization of the class requires two data among them, one is mandatory and other
  * one is non mandatory.
  *
