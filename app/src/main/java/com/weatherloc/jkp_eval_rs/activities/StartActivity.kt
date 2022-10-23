@@ -1,15 +1,14 @@
-package com.weatherloc.jkp_eval_rs
+package com.weatherloc.jkp_eval_rs.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.weatherloc.jkp_eval_rs.Utils.InfoDialog
+import com.weatherloc.jkp_eval_rs.R
 import com.weatherloc.weatherloclib_jkp.WeatherLoc
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWeatherData
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.FutureWeatherData
 import kotlinx.android.synthetic.main.activity_start.*
-import kotlinx.android.synthetic.main.activity_weather_listing.*
 
 class StartActivity : AppCompatActivity() {
 
@@ -30,7 +29,7 @@ class StartActivity : AppCompatActivity() {
         mPbLoader.visibility = View.GONE
         mLlRootLayout.visibility = View.VISIBLE
         print(data)
-        InfoDialog.show(this, "Alert","Something went wrong \n\n$data")
+        InfoDialog.show(this, "Alert", "Something went wrong \n\n$data")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +72,7 @@ class StartActivity : AppCompatActivity() {
                 failureBlock
             )
         } else {
-            InfoDialog.show(this, getString(R.string.coming_soon),getString(R.string.feature_coming_soon_future))
+            InfoDialog.show(this, getString(R.string.coming_soon), getString(R.string.feature_coming_soon_future))
             mLlRootLayout.visibility = View.VISIBLE
             //Todo uncomment below code when api key is available which supports future weather findings...
 //            weatherLoc.obtainFutureWeatherByLatLng(

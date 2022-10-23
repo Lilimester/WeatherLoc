@@ -1,4 +1,4 @@
-package com.weatherloc.jkp_eval_rs
+package com.weatherloc.jkp_eval_rs.Utils
 
 import android.app.AlertDialog
 import android.content.Context

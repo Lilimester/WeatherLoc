@@ -1,4 +1,4 @@
-package com.weatherloc.jkp_eval_rs
+package com.weatherloc.jkp_eval_rs.Utils
 
 object Constants {
     const val INTENT_DATA = "INTENT_DATA"

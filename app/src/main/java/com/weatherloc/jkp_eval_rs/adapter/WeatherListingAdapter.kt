@@ -1,9 +1,11 @@
-package com.weatherloc.jkp_eval_rs
+package com.weatherloc.jkp_eval_rs.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.weatherloc.jkp_eval_rs.R
+import com.weatherloc.jkp_eval_rs.Utils.Constants
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.IndividualDayData
 import kotlinx.android.synthetic.main.weather_listing_item.view.*
 import java.text.SimpleDateFormat
@@ -26,8 +28,6 @@ class WeatherListingAdapter : RecyclerView.Adapter<WeatherListingAdapter.ViewHol
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private var mPostion: Int = 0
 
         fun bind(position: Int) {
             val weatherDetail = mList[position]

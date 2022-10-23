@@ -7,6 +7,7 @@ import com.weatherloc.weatherloclib_jkp.open.OpenWeatherLocCaller
 import com.weatherloc.weatherloclib_jkp.open.enum.TemperatureUnitType
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWeatherData
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.FutureWeatherData
+import java.util.Locale
 
 /**
  * This class helps in obtaining the weather information for current as well as for the specified duration
@@ -418,6 +419,13 @@ class WeatherLoc(private val mContext: Context, private val mUnitType: Temperatu
          */
         fun convertMeterPerSecondToMilePerHour(value: Double?): Double {
             return if (value == null) 0.0 else value * 2.237
+        }
+
+        /**
+         * The method takes up a string value of country code and provides the full name of the country.
+         */
+        fun getCountryName(value: String?): String {
+            return Locale("",value).displayCountry
         }
     }
 }

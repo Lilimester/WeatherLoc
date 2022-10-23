@@ -1,9 +1,11 @@
-package com.weatherloc.jkp_eval_rs
+package com.weatherloc.jkp_eval_rs.activities
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.weatherloc.jkp_eval_rs.Utils.Constants
+import com.weatherloc.jkp_eval_rs.R
 import com.weatherloc.weatherloclib_jkp.WeatherLoc
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWeatherData
 import kotlinx.android.synthetic.main.activity_weather_detail.*
@@ -31,7 +33,7 @@ class WeatherDetailActivity : AppCompatActivity() {
         val weather = mCurrentWeatherData.weather?.get(0)
         mImgDetailWeather.setBackgroundResource(when {
             weather?.main_weather?.contains(Constants.RAIN) ?: false -> R.drawable.weather_rain
-            weather?.main_weather?.contains(Constants.CLOUD) ?: false ->R.drawable.weather_cloud
+            weather?.main_weather?.contains(Constants.CLOUD) ?: false -> R.drawable.weather_cloud
             else -> R.drawable.weather_sun
         })
 

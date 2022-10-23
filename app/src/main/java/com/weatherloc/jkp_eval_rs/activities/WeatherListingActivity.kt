@@ -1,4 +1,4 @@
-package com.weatherloc.jkp_eval_rs
+package com.weatherloc.jkp_eval_rs.activities
 
 import android.content.Context
 import android.content.Intent
@@ -6,8 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.weatherloc.jkp_eval_rs.Utils.Constants
+import com.weatherloc.jkp_eval_rs.R
+import com.weatherloc.jkp_eval_rs.adapter.WeatherListingAdapter
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.FutureWeatherData
-import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.IndividualDayData
 import kotlinx.android.synthetic.main.activity_weather_listing.*
 import java.util.*
 
