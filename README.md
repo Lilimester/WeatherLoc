@@ -28,7 +28,7 @@ of weather in mentioned unit type.
 In case of changing the particular data or field to other data type for usage, other provided conversion methods 
 could be utlized.
 
-# For fetching the current weather information use below method.
+## For fetching the current weather information use below method.
 
 WeatherLoc(this).obtainCurrentWeatherByLatLng(
             context,  //<- pass context
@@ -38,7 +38,7 @@ WeatherLoc(this).obtainCurrentWeatherByLatLng(
             {exception ->  }   //<- A block providing the callback with exception if no data is found.
         )
         
-# For fetching 5-day weather overview.
+## For fetching 5-day weather overview.
 
 weatherLoc.obtainFiveDaysWeatherByLatLng(
             context,  //<- pass context
@@ -48,7 +48,7 @@ weatherLoc.obtainFiveDaysWeatherByLatLng(
             {exception ->  }   //<- A block providing the callback with exception if no data is found.
         )
         
-# For fetching the weather information for specific duration in future, from 1 to maximum 16 days.
+## For fetching the weather information for specific duration in future, from 1 to maximum 16 days.
 
 weatherLoc.obtainFutureWeatherByLatLng(
                 context,  //<- pass context
@@ -59,42 +59,42 @@ weatherLoc.obtainFutureWeatherByLatLng(
                 {exception ->  }   //<- A block providing the callback with exception if no data is found.
             )
  
- ## Conversions.
+ # Conversions.
  
- # Below are the conversion methods for unittype. all methods exception getCountryName returns double value. getCountryName returns string.
+ ## Below are the conversion methods for unittype. all methods exception getCountryName returns double value. getCountryName returns string.
  
- # For conversion of value from kelvin to celsius
+ ## For conversion of value from kelvin to celsius
  
  WeatherLoc.convertKelvinToCelsius(value: Double?)
  
- # For conversion of value from kelvin to fahrenheit
+ ## For conversion of value from kelvin to fahrenheit
  
  WeatherLoc.convertKelvinToFahrenheit(value: Double?)
  
- # For conversion of value from celsius to kelvin
+ ## For conversion of value from celsius to kelvin
  
  WeatherLoc.convertCelsiusToKelvin(value: Double?)
  
- # For conversion of value from celsius to fahrenheit
+ ## For conversion of value from celsius to fahrenheit
  
  WeatherLoc.convertCelsiusToFahrenheit(value: Double?)
 
- # For conversion of value from fahrenheit to kelvin
+ ## For conversion of value from fahrenheit to kelvin
  
  WeatherLoc.convertFahrenheitToKelvin(value: Double?)
  
- # For conversion of value from fahrenheit to celsius
+ ## For conversion of value from fahrenheit to celsius
  
  WeatherLoc.convertFahrenheitToCelsius(value: Double?)
 
- # For conversion of value from meters/second to miles/hour
+ ## For conversion of value from meters/second to miles/hour
  
  WeatherLoc.convertMeterPerSecondToMilePerHour(value: Double?)
  
- # For conversion of value from miles/hour to meters/second
+ ## For conversion of value from miles/hour to meters/second
  
  WeatherLoc.convertMilePerHourToMeterPerSecond(value: Double?)
  
- # For fetching the country name from country code.
+ ## For fetching the country name from country code.
  
  WeatherLoc.getCountryName(value: String?)
