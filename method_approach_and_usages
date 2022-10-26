@@ -1,0 +1,169 @@
+
+This sdk helps in obtaining the weather information for current as well as for the specified duration
+of the time. The initialization of the class requires two data among them, one is mandatory and other
+one is non mandatory.
+
+Required parameter:
+     context of type Context - Interface to global information about an application environment.  This is
+                      an abstract class whose implementation is provided by the Android system.
+                      It allows access to application-specific resources and classes, as well as
+                      up-calls for application-level operations such as launching activities broadcasting
+                      and receiving intents, etc.
+
+Non mandatory optional parameter:
+     mUnitType of type TemperatureUnitType [Enum] - This parameter accepts the enum stating the unit type
+     which you would require.
+         TemperatureUnitType.STANDARD: This unit type division involves the temperature type as kelvin and
+            for speed, the unit type is meters/second.
+         TemperatureUnitType.METRIC: This unit type division involves the temperature type as celsius and
+            for speed, the unit type is meters/second.
+         TemperatureUnitType.IMPERIAL: This unit type division involves the temperature type as fahrenheit and
+             for speed, the unit type is meters/second.
+
+Instance for WeatherLoc which is being created with above optional unit type param will provide the data
+of weather in mentioned unit type.
+
+In case of changing the particular data or field to other data type for usage, please refer to the conversion
+section which is at bottom of this class. There are companion methods which can be utilized for such purpose.
+
+Usage:
+
+WeatherLoc(this).obtainCurrentWeatherByLatLng(
+            this,
+            10.99,
+            44.34,
+            {//callback for weather data.},
+            {//callback for exception.}
+        )
+        
+Initialization requires the context. By the instance, there are 3 major methods available.
+1. obtainCurrentWeatherByLatLng
+2. obtainFutureWeatherByLatLng
+3. obtainFiveDaysWeatherByLatLng
+
+As the companion object, there are total 89 methods available. These methods are for the conversion of data from 
+one unit type to another.
+
+1. convertKelvinToCelsius
+2. convertKelvinToFahrenheit
+3. convertCelsiusToKelvin
+4. convertCelsiusToFahrenheit
+5. convertFahrenheitToKelvin
+6. convertFahrenheitToCelsius
+7. convertMilePerHourToMeterPerSecond
+8. convertMeterPerSecondToMilePerHour
+9. getCountryName
+
+Above all methods accepts double value and provides in the same data type except getCountryName.
+This method accepts country code and provides the full name of country.
+
+Approach:
+
+There is only one access point, which is created for accessing the data or having the data processing.
+All of the inner implementations are declared as internal as inner implementations shall not be accessible 
+by the end user, only class WeatherLoc shall be accessible.
+
+Method calls are being provided with call back which would carry out the data back to user so user can handle
+the app side implementations without disturbing the weather data processing.
+
+Objects are made parcelable, so if user wishes to pass the entire object from their app's one screen to other,
+It would be possible without performing the extra code for conversions on both side.
+
+Utilized the Coroutine for process management as implementation of weather data fetching on main thread would
+cost a lot of resources. It would lighten up the process.
+
+All the data are kept inside the model class of the sdk as differentiating the individual data from model would
+increase difficulty for the user to identify and use the needed data. Through model class, all the required 
+data would be available for application usages.
+
+
+Model Class Breakdown:
+
+  FutureWeatherDate - 
+
+    city:
+           city.id City ID. Please note that built-in geocoder functionality has been deprecated. Learn more here.
+           city.name City name. Please note that built-in geocoder functionality has been deprecated. Learn more here.
+      city.coord:
+           city.coord.lat: City geo location, latitude
+           city.coord.lon: City geo location, longitude
+      country: Country code (GB, JP etc.). Please note that built-in geocoder functionality has been deprecated. Learn more here.
+      population: Internal parameter
+      timezone: Shift in seconds from UTC
+      cod: Internal parameter
+      message: Internal parameter
+      cnt: A number of days returned in the API response
+      list:
+           list.dt: Time of data forecasted
+           list.temp:
+               list.temp.day: Day temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.temp.min: Min daily temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.temp.max: Max daily temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.temp.night: Night temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.temp.eve: Evening temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.temp.morn: Morning temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+           list.feels_like:
+               list.feels_like.day: Day temperature.This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.feels_like.night: Night temperature.This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.feels_like.eve: Evening temperature.This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+               list.feels_like.morn: Morning temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+           list.pressure: Atmospheric pressure on the sea level, hPa
+           list.humidity: Humidity, %
+           list.weather: (more info Weather condition codes)
+               list.weather.id: Weather condition id
+               list.weather.main: Group of weather parameters (Rain, Snow, Extreme etc.)
+               list.weather.description: Weather condition within the group. You can get the output in your language. Learn more.
+               list.weather.icon: Weather icon id
+           list.speed: Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+           list.deg: Wind direction, degrees (meteorological)
+           list.gust: Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+           list.clouds: Cloudiness, %
+           list.rain: Precipitation volume, mm
+           list.snow: Snow volume, mm
+           list.pop: Probability of precipitation. The values of the parameter vary between 0 and 1, where 0 is equal to 0%, 1 is equal to 100%
+     
+  CurrentWeatherData - 
+      weather:
+            coord -
+                coord.lon - City geo location, longitude
+                coord.lat - City geo location, latitude
+            weather -
+                weather.id - Weather condition id
+                weather.main_weather - Group of weather parameters (Rain, Snow, Extreme etc.)
+                weather.description - Weather condition within the group. You can get the output in your language. Learn more
+                weather.icon Weather icon id
+            base - Internal parameter
+            main -
+                main.temp - Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+                main.feels_like - Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+                main.pressure - Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
+                main.humidity - Humidity, %
+                main.temp_min - Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+                main.temp_max - Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+                main.sea_level - Atmospheric pressure on the sea level, hPa
+                main.grnd_level - Atmospheric pressure on the ground level, hPa
+            visibility - Visibility, meter. The maximum value of the visibility is 10km
+            wind -
+                wind.speed - Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
+                wind.deg - Wind direction, degrees (meteorological)
+                wind.gust - Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour
+            clouds -
+                clouds.all - Cloudiness, %
+            rain -
+                rain.oneHour - Rain volume for the last 1 hour, mm
+                rain.threeHours - Rain volume for the last 3 hours, mm
+            snow -
+                snow.oneHour - Snow volume for the last 1 hour, mm
+                snow.threeHours - Snow volume for the last 3 hours, mm
+            dt - Time of data calculation, unix, UTC
+            sys -
+                sys.type - Internal parameter
+                sys.id - Internal parameter
+                sys.message - Internal parameter
+                sys.country - Country code (GB, JP etc.)
+                sys.sunrise - Sunrise time, unix, UTC
+                sys.sunset - Sunset time, unix, UTC
+            timezone - Shift in seconds from UTC
+            id - City ID. Please note that built-in geocoder functionality has been deprecated. Learn more here.
+            name - City name. Please note that built-in geocoder functionality has been deprecated. Learn more here.
+            cod - Internal parameter
