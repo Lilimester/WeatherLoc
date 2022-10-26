@@ -61,7 +61,7 @@ could be utlized.
  
  # Conversions.
  
- ## Below are the conversion methods for unittype. all methods exception getCountryName returns double value. getCountryName returns string.
+ ## Below are the conversion methods for unit type. all methods except getCountryName returns double value. getCountryName returns string.
  
  ## For conversion of value from kelvin to celsius
  
