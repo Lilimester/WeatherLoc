@@ -30,7 +30,7 @@ could be utlized.
 
 ## For fetching the current weather information use below method.
 
-WeatherLoc(this).obtainCurrentWeatherByLatLng(
+        WeatherLoc(this).obtainCurrentWeatherByLatLng(
             context,  //<- pass context
             44.34,   //<- Latitude of the location whose weather required
             10.98,   //<- Longitude of the location whose weather required
@@ -40,7 +40,7 @@ WeatherLoc(this).obtainCurrentWeatherByLatLng(
         
 ## For fetching 5-day weather overview.
 
-weatherLoc.obtainFiveDaysWeatherByLatLng(
+        weatherLoc.obtainFiveDaysWeatherByLatLng(
             context,  //<- pass context
             44.34,   //<- Latitude of the location whose weather required
             10.98,   //<- Longitude of the location whose weather required
@@ -50,14 +50,14 @@ weatherLoc.obtainFiveDaysWeatherByLatLng(
         
 ## For fetching the weather information for specific duration in future, from 1 to maximum 16 days.
 
-weatherLoc.obtainFutureWeatherByLatLng(
-                context,  //<- pass context
-                44.34,   //<- Latitude of the location whose weather required
-                10.98,   //<- Longitude of the location whose weather required
-                mEdtDaysCount.text.toString().toInt(),   //<- Number of days indicating the amount of days whose weather is required.
-                {weather ->  },   //<- A block providing the callback with weather data.
-                {exception ->  }   //<- A block providing the callback with exception if no data is found.
-            )
+        weatherLoc.obtainFutureWeatherByLatLng(
+             context,  //<- pass context
+             44.34,   //<- Latitude of the location whose weather required
+             10.98,   //<- Longitude of the location whose weather required
+             mEdtDaysCount.text.toString().toInt(),   //<- Number of days indicating the amount of days whose weather is required.
+             {weather ->  },   //<- A block providing the callback with weather data.
+             {exception ->  }   //<- A block providing the callback with exception if no data is found.
+         )
  
  # Conversions.
  
@@ -65,36 +65,36 @@ weatherLoc.obtainFutureWeatherByLatLng(
  
  ## For conversion of value from kelvin to celsius
  
- WeatherLoc.convertKelvinToCelsius(value: Double?)
+          WeatherLoc.convertKelvinToCelsius(value: Double?)
  
  ## For conversion of value from kelvin to fahrenheit
  
- WeatherLoc.convertKelvinToFahrenheit(value: Double?)
+           WeatherLoc.convertKelvinToFahrenheit(value: Double?)
  
  ## For conversion of value from celsius to kelvin
  
- WeatherLoc.convertCelsiusToKelvin(value: Double?)
+           WeatherLoc.convertCelsiusToKelvin(value: Double?)
  
  ## For conversion of value from celsius to fahrenheit
  
- WeatherLoc.convertCelsiusToFahrenheit(value: Double?)
+           WeatherLoc.convertCelsiusToFahrenheit(value: Double?)
 
  ## For conversion of value from fahrenheit to kelvin
  
- WeatherLoc.convertFahrenheitToKelvin(value: Double?)
+           WeatherLoc.convertFahrenheitToKelvin(value: Double?)
  
  ## For conversion of value from fahrenheit to celsius
  
- WeatherLoc.convertFahrenheitToCelsius(value: Double?)
+           WeatherLoc.convertFahrenheitToCelsius(value: Double?)
 
  ## For conversion of value from meters/second to miles/hour
  
- WeatherLoc.convertMeterPerSecondToMilePerHour(value: Double?)
+           WeatherLoc.convertMeterPerSecondToMilePerHour(value: Double?)
  
  ## For conversion of value from miles/hour to meters/second
  
- WeatherLoc.convertMilePerHourToMeterPerSecond(value: Double?)
+           WeatherLoc.convertMilePerHourToMeterPerSecond(value: Double?)
  
  ## For fetching the country name from country code.
  
- WeatherLoc.getCountryName(value: String?)
+           WeatherLoc.getCountryName(value: String?)
