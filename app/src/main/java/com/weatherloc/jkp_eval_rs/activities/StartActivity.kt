@@ -10,6 +10,10 @@ import com.weatherloc.weatherloclib_jkp.open.models.model_for_current.CurrentWea
 import com.weatherloc.weatherloclib_jkp.open.models.model_for_future.FutureWeatherData
 import kotlinx.android.synthetic.main.activity_start.*
 
+/**
+ * This application is the example for the weatherLoc sdk.
+ * */
+
 class StartActivity : AppCompatActivity() {
 
     private val successFutureWeatherBlock = { weather: FutureWeatherData ->
